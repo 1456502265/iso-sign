@@ -1,0 +1,28 @@
+---
+import { site } from '../config/site';
+import '../styles/site.css';
+interface Props { title?: string; noindex?: boolean; }
+const { title = site.title, noindex = false } = Astro.props;
+const canonical = site.url ? new URL(Astro.url.pathname, site.url) : undefined;
+---
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={site.description} />
+<meta name="theme-color" content="#2875f5" />
+<link rel="icon" type="image/webp" href="/favicon.webp" />
+{noindex && <meta name="robots" content="noindex,follow" />}
+{canonical && <link rel="canonical" href={canonical} />}
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={site.description} />
+{canonical && <meta property="og:url" content={canonical} />}
+{site.url && <meta property="og:image" content={new URL('/social.webp', site.url)} />}
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="云杉科技 · iOS 应用签名与测试部署技术服务" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={site.description} />
+{site.url && <meta name="twitter:image" content={new URL('/social.webp', site.url)} />}

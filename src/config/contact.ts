@@ -1,0 +1,1 @@
+export const contact = { telegram: 'iospaofu', url: 'https://t.me/iospaofu' };

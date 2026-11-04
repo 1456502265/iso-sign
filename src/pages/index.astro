@@ -1,50 +1,68 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import SiteHead from '../components/SiteHead.astro';
+import Brand from '../components/Brand.astro';
+import Icon from '../components/Icon.astro';
+import { contact } from '../config/contact';
+import { site } from '../config/site';
+import { services, steps, faqs } from '../content/home';
+const schema = { '@context': 'https://schema.org', '@type': 'Organization', name: site.name, ...(site.url ? { url: site.url } : {}), sameAs: [contact.url], description: site.description };
 ---
-
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<html lang="zh-CN">
+  <head><SiteHead /><script type="application/ld+json" set:html={JSON.stringify(schema)} /></head>
+  <body>
+    <a class="skip" href="#main">跳至主要内容</a>
+    <header class="site-header"><div class="container nav-row">
+      <Brand />
+      <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" aria-label="打开导航菜单"><span></span><span></span></button>
+      <nav id="navigation" aria-label="主导航"><a href="#services">服务方案</a><a href="#guide">如何选择</a><a href="#process">服务流程</a><a href="#faq">常见问题</a></nav>
+      <a class="button small nav-contact" href={contact.url} target="_blank" rel="noopener noreferrer"><Icon name="flight" />Telegram 咨询</a>
+    </div></header>
+    <main id="main">
+      <section class="hero"><div class="container hero-grid">
+        <div class="hero-copy"><div class="eyebrow"><span class="status-dot"></span>专注 iOS 应用技术服务</div>
+          <h1>专业 iOS 应用签名<br/><span class="gradient-text">与测试部署服务</span></h1>
+          <p class="hero-description">提供企业内部签名、设备测试签名、TestFlight 与 MDM 部署支持。<br class="desktop-break"/>从方案选择、签名配置到安装验证，一站式协助应用测试与交付。</p>
+          <div class="hero-actions"><a class="button" href={contact.url} target="_blank" rel="noopener noreferrer">咨询适合我的方案 <Icon name="arrow" /></a><a class="text-link" href="#services">了解服务 <span>↗</span></a></div>
+          <div class="hero-notes"><span><Icon name="check" />按场景评估</span><span><Icon name="check" />交付内容清晰</span><span><Icon name="check" />技术协作支持</span></div>
+        </div>
+        <div class="hero-visual" role="img" aria-label="应用包经过签名配置、测试验证后交付至测试设备的流程示意">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="visual-cross cross-one">+</div><div class="visual-cross cross-two">+</div>
+          <div class="floating-label"><span class="status-dot"></span>让每一步，都清晰可见</div>
+          <div class="package-tile"><Icon name="code" /><span>应用构建</span><small>.ipa</small></div>
+          <div class="connection-line"></div>
+          <div class="phone"><div class="phone-island"></div><div class="phone-top">应用测试工作台 <span>•••</span></div><div class="app-symbol"><Icon name="layers" /></div><h3>为下一次发布做好准备</h3><p>签名 · 配置 · 验证</p><div class="phone-checks"><div><span><i>01</i>签名配置</span><Icon name="check" /></div><div><span><i>02</i>设备验证</span><Icon name="check" /></div><div><span><i>03</i>测试交付</span><Icon name="check" /></div></div><div class="phone-ready"><span class="status-dot"></span>准备开启测试 <Icon name="arrow" /></div><small class="demo-note">服务流程示意</small><div class="phone-home"></div></div>
+          <div class="verified-label"><div class="verified-icon"><Icon name="shield" /></div><div><strong>规范配置，安心协作</strong><span>基于实际用途选择部署方式</span></div></div>
+          <span class="visual-caption">从一个构建，到一次完整交付</span>
+        </div>
+      </div></section>
+      <div class="scope-strip"><div class="container"><span class="strip-label">围绕你的应用场景</span><span>企业内部应用</span><b>·</b><span>指定设备测试</span><b>·</b><span>TestFlight 测试</span><b>·</b><span>受管设备部署</span></div></div>
+      <section id="services" class="section"><div class="container"><div class="section-heading"><div><span class="eyebrow">服务方案 / 01</span><h2>不同的使用场景，<br/>找到合适的部署路径。</h2></div><p>从应用用途出发，匹配账号资质与设备范围。<br/>不盲目选择，先把需求说清楚。</p></div><div class="service-grid">{services.map((service) => <article class="service-card"><div class="card-top"><span class="service-icon"><Icon name={service.icon} /></span><span class="card-number">{service.number}</span></div><span class="tag">{service.tag}</span><h3>{service.name}</h3><p>{service.description}</p><ul>{service.points.map(point => <li><Icon name="check" />{point}</li>)}</ul><div class="service-note">{service.note}</div><a href={contact.url} target="_blank" rel="noopener noreferrer" class="service-link" aria-label={`咨询${service.name}`}>了解这项服务 <Icon name="arrow" /></a></article>)}</div></div></section>
+      <section id="guide" class="section guide-section"><div class="container guide-grid"><div><span class="eyebrow">方案选择 / 02</span><h2>先明确用途，<br/>再选择方案。</h2><p class="section-copy">签名不是一个通用的“安装开关”。<br/>合适的方案，要与应用的实际使用方式一致。</p><a class="text-link" href={contact.url} target="_blank" rel="noopener noreferrer">让我们帮你梳理需求 <Icon name="arrow" /></a><div class="guide-note"><Icon name="shield" /><p>云杉科技提供独立技术服务，<br/>非 Apple 官方或授权服务机构。</p></div></div><div class="choice-list">{[
+        ['我想邀请用户测试新版本', '评估 TestFlight 测试部署', '需要遵循测试版本有效期及相关审核要求。'],
+        ['我想在指定设备上验证应用', '评估 Ad Hoc 测试签名', '需要注册设备，并核对账号设备名额。'],
+        ['我需要部署企业内部应用', '核对企业资质与内部使用范围', '仅限符合计划要求的内部专有应用。'],
+        ['我需要管理组织的设备和应用', '评估 MDM 受管部署', '需要设备授权与相应的应用部署资质。'],
+      ].map(([title, answer, detail], i) => <div class="choice-row"><span class="choice-number">0{i+1}</span><div><h3>{title}</h3><strong>{answer}</strong><p>{detail}</p></div><Icon name="arrow" /></div>)}</div></div></section>
+      <section id="process" class="section"><div class="container"><div class="section-heading"><div><span class="eyebrow">服务流程 / 03</span><h2>从第一次沟通，<br/>到交付后的每一步。</h2></div><p>先确认范围，再开展协作。<br/>让交付有依据，让合作更简单。</p></div><div class="process-grid">{steps.map(([title, description], i) => <article><div class="step-top"><span>0{i+1}</span><Icon name="arrow" /></div><h3>{title}</h3><p>{description}</p></article>)}</div></div></section>
+      <section class="about-section"><div class="container about-grid"><div><span class="eyebrow">关于云杉</span><h2>技术服务，<br/>也需要把话说明白。</h2></div><div><p class="about-lead">我们关注签名配置、测试部署和安装过程中的具体问题。比起笼统的承诺，更重视适用条件、交付内容与清楚的协作边界。</p><div class="principles"><div><span>01 / 需求先行</span><p>先了解应用用途，核对资质与授权。</p></div><div><span>02 / 透明交付</span><p>开始前确认费用、周期与验收方式。</p></div><div><span>03 / 持续沟通</span><p>按约定范围提供更新和异常排查支持。</p></div></div></div></div></section>
+      <section id="faq" class="section"><div class="container faq-grid"><div><span class="eyebrow">常见问题 / 04</span><h2>你可能还想了解。</h2><p class="section-copy">还有具体问题？<br/>在 Telegram 上直接聊聊。</p><a class="text-link" href={contact.url} target="_blank" rel="noopener noreferrer">联系 @{contact.telegram} <Icon name="arrow" /></a></div><div class="faq-list">{faqs.map(([question, answer], i) => <details name="faq" open={i === 0}><summary>{question}<span class="faq-plus">+</span></summary><p>{answer}</p></details>)}</div></div></section>
+      <section id="contact" class="contact-section"><div class="container contact-band"><div><span class="eyebrow">从你的需求开始</span><h2>下一步，聊聊你的应用。</h2><p>带上应用用途与设备范围，让我们一起梳理适合的方案。</p></div><div class="contact-actions"><a class="button white" href={contact.url} target="_blank" rel="noopener noreferrer"><Icon name="flight" />Telegram 咨询 <Icon name="arrow" /></a><button class="copy-contact" data-username={`@${contact.telegram}`}>复制账号 @{contact.telegram}</button><span id="copy-status" role="status" aria-live="polite"></span></div></div></section>
+    </main>
+    <footer><div class="container"><div class="footer-main"><div><Brand /><p>iOS 应用签名与测试部署技术服务</p></div><nav aria-label="页脚导航"><a href="#services">服务方案</a><a href="#process">服务流程</a><a href="#faq">常见问题</a><a href={contact.url} target="_blank" rel="noopener noreferrer">Telegram ↗</a></nav></div><div class="footer-bottom"><span>© {new Date().getFullYear()} 云杉科技</span><div><button data-dialog="privacy">隐私说明</button><span>·</span><button data-dialog="terms">服务说明</button><a href="#main">回到顶部 ↑</a></div></div></div></footer>
+    <a class="floating-contact" href={contact.url} target="_blank" rel="noopener noreferrer" aria-label="通过 Telegram 联系咨询" title={`Telegram：@${contact.telegram}`}><Icon name="flight" /><span>联系咨询</span></a>
+    <dialog id="privacy" aria-labelledby="privacy-title"><button class="dialog-close" aria-label="关闭隐私说明">×</button><h2 id="privacy-title">隐私说明</h2><p>本页面不设置注册或询价表单，不主动收集访客的姓名、电话、邮箱或应用文件，不使用广告追踪脚本。托管服务商可能处理必要的访问日志。</p><p>点击 Telegram 链接后，将访问第三方服务，其数据处理规则由 Telegram 提供。咨询过程中，请仅提供沟通所需的信息，勿主动发送账号密码、私钥或未经授权的用户数据。</p><p>如需了解合作资料的保存、删除及保密安排，请在提交资料前通过 Telegram 与我们确认。</p></dialog>
+    <dialog id="terms" aria-labelledby="terms-title"><button class="dialog-close" aria-label="关闭服务说明">×</button><h2 id="terms-title">服务说明</h2><p>本站介绍 iOS 签名配置、应用测试及内部部署技术支持。服务仅面向拥有相应权利、资质及授权的应用和设备，须符合 Apple 相关计划及适用规则。</p><p>实际服务内容、费用、期限、验收方式、维护范围及退款或终止条件，以合作前双方确认的约定为准。请在确认前充分了解相关条件。</p><p>证书状态、平台规则和审核结果不由本站控制，不承诺永久有效、不掉签或必然通过审核。云杉科技与 Apple Inc. 无隶属或授权关系。</p></dialog>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const navigation = document.querySelector('#navigation');
+      const closeMenu = () => { toggle?.setAttribute('aria-expanded', 'false'); toggle?.setAttribute('aria-label', '打开导航菜单'); navigation?.classList.remove('is-open'); };
+      toggle?.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', String(open)); toggle.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单'); navigation?.classList.toggle('is-open', open); });
+      navigation?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+      document.querySelector<HTMLButtonElement>('.copy-contact')?.addEventListener('click', async (event) => { const button = event.currentTarget as HTMLButtonElement; const status = document.querySelector('#copy-status'); try { await navigator.clipboard.writeText(button.dataset.username || ''); if (status) status.textContent = '账号已复制'; } catch { if (status) status.textContent = `请手动复制：${button.dataset.username}`; } });
+      document.querySelectorAll<HTMLButtonElement>('[data-dialog]').forEach(button => button.addEventListener('click', () => { document.querySelector<HTMLDialogElement>(`#${button.dataset.dialog}`)?.showModal(); }));
+      document.querySelectorAll<HTMLDialogElement>('dialog').forEach(dialog => { dialog.querySelector('.dialog-close')?.addEventListener('click', () => dialog.close()); dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } }); });
+    </script>
+  </body>
 </html>
