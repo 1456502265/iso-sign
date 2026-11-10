@@ -8,6 +8,12 @@
 Logo 按原始宽高比完整显示，页眉高度随内容撑开；桌面端上下内边距各 12px，手机端各 10px。手机导航菜单从页眉底部展开，页脚 Logo 同样不裁切。
 页眉 Logo 宽度分别为桌面端 82px、平板端 74px、手机端 64px。
 
+## Google 转化追踪
+
+全站已安装 Google Tag Manager 容器 `GTM-K3PLLHWJ`（head 脚本及 body 的 noscript）。维护位置为 `src/components/GoogleTagManager.astro`。
+
+转化标签和触发器沿用 GTM 后台已有配置，页面不额外发送自定义转化事件。代码部署后，在 GTM 预览 / Tag Assistant 中检查容器加载和已有转化标签触发情况。此次未操作 GTM 后台或发布网站；需要时按实际投放地区和启用标签配置用户同意管理。
+
 ## 本地开发
 要求 Node.js 22 或以上。
 ```bash

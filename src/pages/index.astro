@@ -1,5 +1,6 @@
 ---
 import SiteHead from '../components/SiteHead.astro';
+import GoogleTagManager from '../components/GoogleTagManager.astro';
 import Brand from '../components/Brand.astro';
 import Icon from '../components/Icon.astro';
 import { contact } from '../config/contact';
@@ -11,6 +12,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'Organization', name
 <html lang="zh-CN">
   <head><SiteHead /><script type="application/ld+json" set:html={JSON.stringify(schema)} /></head>
   <body>
+    <GoogleTagManager noscript />
     <a class="skip" href="#main">跳至主要内容</a>
     <header class="site-header"><div class="container nav-row">
       <Brand />
@@ -51,7 +53,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'Organization', name
     </main>
     <footer><div class="container"><div class="footer-main"><div><Brand /><p>iOS 应用签名与测试部署技术服务</p></div><nav aria-label="页脚导航"><a href="#services">服务方案</a><a href="#process">服务流程</a><a href="#faq">常见问题</a><a href={contact.url} target="_blank" rel="noopener noreferrer">Telegram ↗</a></nav></div><div class="footer-bottom"><span>© {new Date().getFullYear()} 云杉科技</span><div><button data-dialog="privacy">隐私说明</button><span>·</span><button data-dialog="terms">服务说明</button><a href="#main">回到顶部 ↑</a></div></div></div></footer>
     <a class="floating-contact" href={contact.url} target="_blank" rel="noopener noreferrer" aria-label="通过 Telegram 联系咨询" title={`Telegram：@${contact.telegram}`}><Icon name="flight" /><span>联系咨询</span></a>
-    <dialog id="privacy" aria-labelledby="privacy-title"><button class="dialog-close" aria-label="关闭隐私说明">×</button><h2 id="privacy-title">隐私说明</h2><p>本页面不设置注册或询价表单，不主动收集访客的姓名、电话、邮箱或应用文件，不使用广告追踪脚本。托管服务商可能处理必要的访问日志。</p><p>点击 Telegram 链接后，将访问第三方服务，其数据处理规则由 Telegram 提供。咨询过程中，请仅提供沟通所需的信息，勿主动发送账号密码、私钥或未经授权的用户数据。</p><p>如需了解合作资料的保存、删除及保密安排，请在提交资料前通过 Telegram 与我们确认。</p></dialog>
+    <dialog id="privacy" aria-labelledby="privacy-title"><button class="dialog-close" aria-label="关闭隐私说明">×</button><h2 id="privacy-title">隐私说明</h2><p>本页面不设置注册或询价表单，不主动收集访客的姓名、电话、邮箱或应用文件。本站使用 Google Tag Manager 加载后台配置的统计及广告转化标签，用于衡量推广效果。根据容器中启用的标签，Google 可能使用 Cookie 等技术处理访问及广告互动信息。托管服务商可能处理必要的访问日志。</p><p>点击 Telegram 链接后，将访问第三方服务，其数据处理规则由 Telegram 提供。咨询过程中，请仅提供沟通所需的信息，勿主动发送账号密码、私钥或未经授权的用户数据。</p><p>如需了解合作资料的保存、删除及保密安排，请在提交资料前通过 Telegram 与我们确认。</p></dialog>
     <dialog id="terms" aria-labelledby="terms-title"><button class="dialog-close" aria-label="关闭服务说明">×</button><h2 id="terms-title">服务说明</h2><p>本站介绍 iOS 签名配置、应用测试及内部部署技术支持。服务仅面向拥有相应权利、资质及授权的应用和设备，须符合 Apple 相关计划及适用规则。</p><p>实际服务内容、费用、期限、验收方式、维护范围及退款或终止条件，以合作前双方确认的约定为准。请在确认前充分了解相关条件。</p><p>证书状态、平台规则和审核结果不由本站控制，不承诺永久有效、不掉签或必然通过审核。云杉科技与 Apple Inc. 无隶属或授权关系。</p></dialog>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');

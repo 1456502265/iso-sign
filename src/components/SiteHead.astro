@@ -1,11 +1,13 @@
 ---
 import { site } from '../config/site';
+import GoogleTagManager from './GoogleTagManager.astro';
 import '../styles/site.css';
 interface Props { title?: string; noindex?: boolean; }
 const { title = site.title, noindex = false } = Astro.props;
 const canonical = site.url ? new URL(Astro.url.pathname, site.url) : undefined;
 ---
 <meta charset="UTF-8" />
+<GoogleTagManager />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{title}</title>
 <meta name="description" content={site.description} />
